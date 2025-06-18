@@ -7,6 +7,27 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <StackPanel>
-        <TextBlock Text="{Binding CategoryName}" FontSize="16" FontWeight="Bold"/>
+        <Border Margin="10,0,10,10" Padding="10" BorderThickness="0,0,0,1" BorderBrush="LightGray">
+            <StackPanel>
+                <StackPanel>
+                    <TextBlock Text="{Binding CategoryName}" FontSize="16" FontWeight="Bold" Margin="0,0,0,5"/>
+                    <StackPanel Orientation="Horizontal" Visibility="{Binding IsLoading, Converter={StaticResource BoolToVis}}">
+                        <ProgressBar IsIndeterminate="True" Width="100" Height="4" />
+                        <TextBlock Text=" Loading..." VerticalAlignment="Center" Margin="5,0,0,0"/>
+                    </StackPanel>
+                </StackPanel>
+
+                <ItemsControl ItemsSource="{Binding Articles}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel Orientation="Horizontal" Margin="0,2">
+                                <TextBlock Text="{Binding Headline}" TextWrapping="Wrap"/>
+                                <TextBlock Text="{Binding PublishedAt, StringFormat= - {0:MMM dd, yyyy h:mm tt}}" Foreground="Gray" FontSize="12" VerticalAlignment="Bottom" TextWrapping="Wrap"/>
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+        </Border>
     </StackPanel>
 </UserControl>
