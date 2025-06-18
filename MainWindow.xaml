@@ -4,9 +4,33 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FluentNewsApp_Jasmeet"
+        xmlns:vm="clr-namespace:FluentNewsApp_Jasmeet.ViewModels"
+        xmlns:views="clr-namespace:FluentNewsApp_Jasmeet.Views"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="News Aggregator App" Height="450" Width="800">
     <Grid>
-        <Button Style="{DynamicResource AccentButtonStyle}" Content="Sample Button" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0" Margin="20 10 20 10" VerticalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0" Text="News Aggregator App" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+            <Button Grid.Column="1" Style="{DynamicResource AccentButtonStyle}" Content="Refresh" Margin="20,0,0,0" VerticalAlignment="Center" />
+        </Grid>
+
+        <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+            <ItemsControl ItemsSource="{Binding Categories}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:CategoryViewModel}">
+                        <views:CategoryView/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </ScrollViewer>
     </Grid>
 </Window>
