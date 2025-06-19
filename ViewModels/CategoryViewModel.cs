@@ -1,4 +1,5 @@
 ﻿using FluentNewsApp_Jasmeet.Models;
+using FluentNewsApp_Jasmeet.Services;
 using System.Collections.ObjectModel;
 
 namespace FluentNewsApp_Jasmeet.ViewModels
@@ -7,9 +8,10 @@ namespace FluentNewsApp_Jasmeet.ViewModels
     {
         private bool _isLoading;
         private bool _isError;
+        private NewsApiService _newsApiService = new();
 
         public string CategoryName { get; } = categoryName;
-        public ObservableCollection<Article> Articles { get; } = [];
+        public ObservableCollection<Article> Articles { get; set; } = [];
 
         public bool IsLoading
         {
@@ -44,12 +46,16 @@ namespace FluentNewsApp_Jasmeet.ViewModels
                 IsError = false;
                 IsLoading = true;
 
+                // Clearing the list before loading new
+                Articles.Clear();
+
                 Random rnd = new();
                 await Task.Delay(rnd.Next(1, 10) * 1000);
 
-                for (int i = 0; i < 10; i++)
+                var articles = await _newsApiService.GetNewsAsync(CategoryName);
+                foreach (var article in articles)
                 {
-                    Articles.Add(new Article() { Headline = $"Test {i} {CategoryName}", PublishedAt = new DateTime() });
+                    Articles.Add(article);
                 }
 
                 IsLoading = false;

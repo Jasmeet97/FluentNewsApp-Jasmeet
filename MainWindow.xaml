@@ -19,7 +19,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0" Text="News Aggregator App" FontSize="20" FontWeight="Bold" VerticalAlignment="Center"/>
+            <TextBlock Grid.Column="0" Text="News Aggregator App" Style="{StaticResource TitleTextBlockStyle}"/>
             <Button Grid.Column="1" Style="{DynamicResource AccentButtonStyle}" Content="Refresh" Margin="20,0,0,0" VerticalAlignment="Center" />
         </Grid>
 
