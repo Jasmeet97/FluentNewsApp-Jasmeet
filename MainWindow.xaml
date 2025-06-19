@@ -7,7 +7,7 @@
         xmlns:vm="clr-namespace:FluentNewsApp_Jasmeet.ViewModels"
         xmlns:views="clr-namespace:FluentNewsApp_Jasmeet.Views"
         mc:Ignorable="d"
-        Title="News Aggregator App" Height="600" Width="550">
+        Title="News Aggregator App" Height="600" Width="850">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -18,9 +18,13 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Column="0" Text="News Aggregator App" Style="{StaticResource TitleTextBlockStyle}"/>
-            <Button Grid.Column="1" Style="{DynamicResource AccentButtonStyle}" Content="Refresh" Margin="20,0,0,0" VerticalAlignment="Center" />
+            <Button Grid.Column="1" Style="{DynamicResource AccentButtonStyle}" Content="Refresh" Margin="20,0,0,0" VerticalAlignment="Center" Command="{Binding RefreshCommand}" />
+            <Button Grid.Column="2" Content="Simulate Errors" Margin="20,0,0,0" VerticalAlignment="Center" Command="{Binding SimulateErrorCommand}" />
+            <Button Grid.Column="3" Content="Simulate Empty" Margin="20,0,0,0" VerticalAlignment="Center" Command="{Binding SimulateEmptyCommand}" />
         </Grid>
 
         <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">

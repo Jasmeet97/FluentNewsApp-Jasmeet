@@ -24,7 +24,7 @@ namespace FluentNewsApp_Jasmeet.Services
         {
             if (Configuration == null)
             {
-                throw new Exception("Configuration not present");
+                throw new Exception("App Configuration Missing.");
             }
 
             string? newsApiKey = Configuration["NewsApi:ApiKey"];
@@ -32,7 +32,7 @@ namespace FluentNewsApp_Jasmeet.Services
 
             if (newsApiKey == null || baseUrl == null)
             {
-                throw new Exception("API Creds missing");
+                throw new Exception("API Credentials Missing.");
             }
 
             return $"{baseUrl}?country=us&category={category}&apiKey={newsApiKey}";
@@ -45,19 +45,18 @@ namespace FluentNewsApp_Jasmeet.Services
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new HttpRequestException($"Request failed with status {response.StatusCode}");
+                throw new HttpRequestException($"Request failed with status {response.StatusCode}.");
             }
 
             string jsonResponse = await response.Content.ReadAsStringAsync();
-            var articlesData = JsonSerializer.Deserialize<NewsApiResponse>(jsonResponse) ?? throw new Exception("Failed to fetch articles");
+            var articlesData = JsonSerializer.Deserialize<NewsApiResponse>(jsonResponse) ?? throw new Exception("Failed to display articles.");
 
             if (articlesData.Status != "ok")
             {
-                throw new Exception(articlesData.Message ?? "Unknown Error");
+                throw new Exception(articlesData.Message ?? "Something went wrong. Try again later.");
             }
 
             return articlesData.Articles ?? [];
         }
-
     }
 }
