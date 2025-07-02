@@ -6,7 +6,7 @@ namespace FluentNewsApp_Jasmeet.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
-        private readonly List<string> PredefinedCategories = ["Technology", "Business", "Sports"];
+        private readonly List<string> PredefinedCategories = ["Technology", "Business", "Sports", "Entertainment"];
         public ObservableCollection<CategoryViewModel> Categories { get; } = [];
         public ICommand RefreshCommand { get; }
         public ICommand SimulateErrorCommand { get; }
