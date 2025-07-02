@@ -22,6 +22,7 @@ namespace FluentNewsApp_Jasmeet.Services
 
         private static string FormUrl(string category)
         {
+            //method to create a URL for the News API
             if (Configuration == null)
             {
                 throw new Exception("App Configuration Missing.");
